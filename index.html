@@ -5,50 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToxquiDev | Angel Toxqui</title>
     <style>
+        :root {
+            --bg-color: #0f172a;       /* Azul oscuro fondo */
+            --card-bg: #1e293b;        /* Azul grisáceo tarjetas */
+            --text-main: #e2e8f0;      /* Blanco suave */
+            --text-muted: #94a3b8;     /* Gris texto */
+            --accent: #38bdf8;         /* Azul brillante */
+            --success: #22c55e;        /* Verde WhatsApp */
+        }
+
         body {
             margin: 0;
-            padding: 0;
+            padding: 2rem 1rem;
             font-family: 'Courier New', Courier, monospace;
-            background-color: #0f172a;
-            color: #e2e8f0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh; /* Permite scroll si es necesario */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px; /* Hice la caja más ancha para que quepan los servicios */
+            width: 100%;
             text-align: center;
         }
-        .container {
-            max-width: 600px;
-            padding: 2rem;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
+
+        /* PERFIL */
+        .profile-section {
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
         }
-        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .handle { color: #38bdf8; font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 1.5rem; }
-        p { line-height: 1.6; margin-bottom: 1.5rem; color: #94a3b8; }
+
+        h1 { font-size: 2.5rem; margin: 0 0 0.5rem 0; letter-spacing: -1px; }
+        .handle { color: var(--accent); font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block; }
+        .bio { color: var(--text-muted); line-height: 1.6; font-size: 1rem; margin-bottom: 1.5rem; }
+
+        /* SERVICIOS (GRID) */
+        .services-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Responsivo automático */
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+        .service-name { font-size: 1.1rem; font-weight: bold; color: var(--text-main); margin-bottom: 0.5rem; display: block; }
+        .service-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+
+        /* BOTÓN */
         .btn {
-            background-color: #22c55e; /* Color verde WhatsApp */
-            color: #ffffff; 
-            padding: 12px 24px;
-            text-decoration: none; font-weight: bold; border-radius: 6px;
-            display: inline-block; margin-top: 1rem;
-            transition: transform 0.2s;
+            background-color: var(--success);
+            color: #ffffff;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.2);
         }
-        .btn:hover { transform: translateY(-3px); background-color: #16a34a; }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.4);
+        }
+
+        /* FOOTER */
+        footer { margin-top: 3rem; color: #475569; font-size: 0.8rem; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Angel Toxqui</h1>
-        <span class="handle">&lt;ToxquiDev/&gt;</span>
-        <p>Desarrollador Web & Hardware.</p>
-        <p>🚀 Construyendo soluciones IoT y Web.</p>
         
-        <a href="https://wa.me/573135690996?text=Hola%20Angel,%20vi%20tu%20web%20y%20me%20interesa%20hablar%20contigo" class="btn" target="_blank">
-            ¡Cotiza tu proyecto hoy!
-        </a>
+        <section class="profile-section">
+            <h1>Angel Toxqui</h1>
+            <span class="handle">&lt;ToxquiDev/&gt;</span>
+            <p class="bio">
+                Ingeniero Electrónico & Full Stack Developer.<br>
+                Especialista en convertir ideas complejas en código limpio.
+                
+            </p>
+            
+            <h2 class="services-title">Lo que hago</h2>
+
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <span class="icon">💻</span>
+                    <span class="service-name">Desarrollo Web</span>
+                    <p class="service-desc">Landing pages modernas y rápidas para vender más. Sitios corporativos y portafolios.</p>
+                </div>
+
+                <div class="service-card">
+                    <span class="icon">⚙️</span>
+                    <span class="service-name">Sistemas a Medida</span>
+                    <p class="service-desc">Backend potente con Python & FastAPI. Automatización y Paneles de control (Dashboards).</p>
+                </div>
+
+                <div class="service-card">
+                    <span class="icon">📡</span>
+                    <span class="service-name">Prototipado IoT</span>
+                    <p class="service-desc">Conexión de hardware (ESP32/Arduino) a la nube. Monitoreo y control remoto.</p>
+                </div>
+
+            </div>
+
+            <a href="https://wa.me/573135690996?text=Hola%20Angel,%20quiero%20cotizar%20un%20proyecto%20contigo" class="btn" target="_blank">
+                🚀 Cotizar mi Proyecto
+            </a>
+        </section>
+
+        <footer>
+            &copy; 2025 toxquidev - Angel Toxqui Muñoz.
+        </footer>
+
     </div>
+
 </body>
 </html>
