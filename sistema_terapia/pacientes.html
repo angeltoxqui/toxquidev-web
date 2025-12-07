@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes - ToxquiDev Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-50 flex justify-between items-center shadow-md">
+        <a href="dashboard.html" class="flex items-center space-x-2 font-bold">
+            <i class="fas fa-arrow-left"></i>
+            <span>Volver</span>
+        </a>
+        <h1 class="text-lg">Gestión de Pacientes</h1>
+        <div class="w-8"></div>
+    </nav>
+
+    <div class="container mx-auto p-4 max-w-2xl">
+
+        <div class="bg-white p-6 rounded-xl shadow-md mb-6 border border-gray-100">
+            <h2 class="text-gray-700 font-bold mb-4 flex items-center gap-2">
+                <i class="fas fa-user-plus text-blue-500"></i> Nuevo Paciente
+            </h2>
+            <form id="formPaciente" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Nombre Completo</label>
+                    <input type="text" id="nombre" required placeholder="Ej: Juan Pérez"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-600">Tipo de Paciente</label>
+                    <div class="grid grid-cols-2 gap-4 mt-1">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipo" value="particular" class="peer sr-only" checked>
+                            <div class="p-3 text-center border rounded-lg peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-600 transition">
+                                <i class="fas fa-user mb-1"></i><br>Particular
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipo" value="cud" class="peer sr-only">
+                            <div class="p-3 text-center border rounded-lg peer-checked:bg-purple-50 peer-checked:border-purple-500 peer-checked:text-purple-600 transition">
+                                <i class="fas fa-wheelchair mb-1"></i><br>CUD
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-lg">
+                    Guardar Paciente
+                </button>
+            </form>
+        </div>
+
+        <h3 class="text-gray-500 font-bold text-sm uppercase mb-3 ml-1">Listado Actual</h3>
+        <div id="listaPacientes" class="space-y-3 pb-20">
+            <div class="text-center text-gray-400 py-10">Cargando...</div>
+        </div>
+
+    </div>
+
+    <script>
+        const API_URL = "https://api.toxquidev.com";
+
+        // 1. Verificar si hay usuario logueado (Seguridad básica)
+        document.addEventListener("DOMContentLoaded", () => {
+             if (!localStorage.getItem("usuario_sistema")) {
+                window.location.href = "index.html";
+            }
+            cargarPacientes();
+        });
+
+        async function cargarPacientes() {
+            try {
+                const res = await fetch(`${API_URL}/pacientes/`);
+                const pacientes = await res.json();
+                
+                const contenedor = document.getElementById("listaPacientes");
+                contenedor.innerHTML = ""; 
+
+                if (pacientes.length === 0) {
+                    contenedor.innerHTML = '<div class="text-center text-gray-400 py-4">No hay pacientes registrados aún.</div>';
+                    return;
+                }
+
+                pacientes.forEach(p => {
+                    const esCud = p.tipo === 'cud';
+                    const colorBorde = esCud ? 'border-l-purple-500' : 'border-l-blue-500';
+                    const etiqueta = esCud ? 'CUD' : 'PARTICULAR';
+                    const colorEtiqueta = esCud ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
+
+                    const card = `
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 border-l-4 ${colorBorde} flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">${p.nombre}</h4>
+                                <span class="text-xs font-bold px-2 py-1 rounded ${colorEtiqueta}">${etiqueta}</span>
+                            </div>
+                            <div class="text-gray-400">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    `;
+                    contenedor.innerHTML += card;
+                });
+            } catch (error) {
+                console.error("Error cargando pacientes:", error);
+                document.getElementById("listaPacientes").innerHTML = '<p class="text-red-500 text-center">Error de conexión con la API</p>';
+            }
+        }
+
+        // 2. Guardar nuevo paciente
+        document.getElementById("formPaciente").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const nombre = document.getElementById("nombre").value;
+            const tipo = document.querySelector('input[name="tipo"]:checked').value;
+            const btn = e.target.querySelector("button");
+
+            btn.disabled = true;
+            btn.textContent = "Guardando...";
+
+            try {
+                const res = await fetch(`${API_URL}/pacientes/`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nombre, tipo })
+                });
+
+                if (res.ok) {
+                    document.getElementById("formPaciente").reset();
+                    cargarPacientes(); // Recargar la lista para ver el nuevo
+                    // Puedes reemplazar el alert por un mensaje más bonito con Tailwind
+                    alert("¡Paciente guardado!"); 
+                } else {
+                    alert("Error al guardar, revise el servidor.");
+                }
+            } catch (error) {
+                alert("Error de red.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Guardar Paciente";
+            }
+        });
+    </script>
+</body>
+</html>

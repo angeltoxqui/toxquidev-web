@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - Sistema Terapéutico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden border border-gray-100">
+        
+        <div class="bg-blue-600 p-8 text-center">
+            <h1 class="text-2xl font-bold text-white mb-1">Bienvenido</h1>
+            <p class="text-blue-100 text-sm">Sistema de Gestión Terapéutica</p>
+        </div>
+
+        <div class="p-8">
+            <form id="loginForm" class="space-y-5">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                    <input type="email" id="email" required 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                        placeholder="admin@toxquidev.com">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="password" required 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                        placeholder="••••••••">
+                </div>
+
+                <div id="errorMessage" class="hidden text-red-500 text-sm text-center bg-red-50 p-2 rounded">
+                    Error de credenciales
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition transform active:scale-95 shadow-lg">
+                    Iniciar Sesión
+                </button>
+            </form>
+        </div>
+        
+        <div class="bg-gray-50 p-4 text-center text-xs text-gray-500">
+            &copy; 2025 ToxquiDev Systems
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // 🛑 Evita que se muestre el JSON 🛑
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+            const btn = e.target.querySelector('button');
+            const API_URL = "https://api.toxquidev.com"; // Tu backend local
+
+            btn.innerHTML = 'Verificando...';
+            btn.disabled = true;
+            errorMsg.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // SI EL LOGIN ES CORRECTO
+                    localStorage.setItem("usuario_sistema", JSON.stringify(data.usuario));
+                    window.location.href = 'dashboard.html'; // REDIRECCIÓN FINAL
+                } else {
+                    // SI HAY ERROR (401 - Unauthorized)
+                    errorMsg.textContent = data.detail || 'Email o contraseña incorrectos';
+                    errorMsg.classList.remove('hidden');
+                }
+
+            } catch (error) {
+                errorMsg.textContent = 'No se pudo conectar con el servidor (API apagada?)';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                btn.innerHTML = 'Iniciar Sesión';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
