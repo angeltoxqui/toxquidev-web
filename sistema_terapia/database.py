@@ -1,12 +1,18 @@
 import mysql.connector
 from mysql.connector import pooling
+import os  # <-- 1. Importamos OS para leer variables del sistema
+from dotenv import load_dotenv # <-- 2. Importamos dotenv
 
-# Crear un pool de conexiones para mejor manejo
+# 3. Cargar variables del archivo .env (solo funcionará en tu PC local)
+load_dotenv()
+
+# 4. Configuración usando os.getenv
+# Si no encuentra la variable, puedes poner un valor por defecto o dejarlo que falle
 db_config = {
-    "host": "srv1709.hstgr.io",
-    "user": "u393944978_admin",
-    "password": "ToxquiDev2025*",
-    "database": "u393944978_terapia",
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME"),
     "autocommit": True,
     "auth_plugin": 'mysql_native_password'
 }
