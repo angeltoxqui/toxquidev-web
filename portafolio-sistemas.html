@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas & Backend | ToxquiDev</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;       /* Fondo principal */
+            --card-bg: #1e293b;        /* Fondo tarjetas */
+            --text-main: #e2e8f0;      /* Texto principal */
+            --text-muted: #94a3b8;     /* Texto secundario */
+            --accent: #a855f7;         /* MORADO (Diferenciador para Sistemas) */
+            --hover: #9333ea;          /* Morado hover */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 { margin: 0; color: var(--accent); font-size: 1.8rem; }
+        .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* GRID DE PROYECTOS */
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            padding: 3rem 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            background: linear-gradient(45deg, #3b0764, #1e293b);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .tech-icon { font-size: 3rem; color: var(--text-main); }
+
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; color: #fff; }
+        
+        .card-desc { 
+            font-size: 0.9rem; 
+            color: var(--text-muted); 
+            line-height: 1.5; 
+            margin-bottom: 1.5rem; 
+            flex-grow: 1; 
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-val { display: block; font-weight: bold; color: var(--accent); font-size: 1.1rem; }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+
+        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .tag {
+            background-color: rgba(168, 85, 247, 0.15); /* Morado transparente */
+            color: #d8b4fe;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .card-links { display: flex; gap: 1rem; margin-top: auto; }
+        
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            transition: background 0.2s;
+        }
+
+        .btn-primary { background-color: var(--accent); color: #fff; }
+        .btn-primary:hover { background-color: var(--hover); }
+        
+        .btn-secondary { border: 1px solid #334155; color: var(--text-main); }
+        .btn-secondary:hover { background-color: #334155; }
+
+        /* FOOTER */
+        .back-link {
+            display: inline-block;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .back-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sistemas a Medida</h1>
+        <p class="subtitle">Arquitectura de Software & Backend por &lt;ToxquiDev/&gt;</p>
+    </header>
+
+    <div class="container">
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="card-header">
+                    <span class="tech-icon">⚙️</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">API RESTful Clínica</h3>
+                    <p class="card-desc">Núcleo de procesamiento para gestión hospitalaria. Maneja autenticación segura (JWT), transacciones financieras y expedientes médicos.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-val">+99%</span>
+                            <span class="stat-label">Uptime</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">&lt;50ms</span>
+                            <span class="stat-label">Latencia</span>
+                        </div>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Railway</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://toxquidev-web-production.up.railway.app/docs" target="_blank" class="btn btn-primary">Ver Docs (Swagger)</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <span class="tech-icon">🛒</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Sistema POS & Inventario</h3>
+                    <p class="card-desc">Solución integral para comercios locales. Control de stock en tiempo real, facturación electrónica y reportes de ventas diarios.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-val">Local</span>
+                            <span class="stat-label">Despliegue</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">SQL</span>
+                            <span class="stat-label">Relacional</span>
+                        </div>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Tkinter/Flet</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">ReportLab</span>
+                    </div>
+                    <div class="card-links">
+                        <span class="btn btn-secondary" style="cursor: default;">En Desarrollo 🚧</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <span class="tech-icon">🤖</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Bots de Automatización</h3>
+                    <p class="card-desc">Scripts y flujos de trabajo para automatizar tareas repetitivas. Web scraping, notificaciones automáticas y procesamiento de datos.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Selenium</span>
+                        <span class="tag">n8n</span>
+                        <span class="tag">APIs</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="btn btn-secondary">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Volver al Inicio</a>
+        </div>
+    </div>
+
+</body>
+</html>
