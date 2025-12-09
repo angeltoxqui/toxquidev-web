@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT & Hardware | ToxquiDev</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;       /* Fondo principal */
+            --card-bg: #1e293b;        /* Fondo tarjetas */
+            --text-main: #e2e8f0;      /* Texto principal */
+            --text-muted: #94a3b8;     /* Texto secundario */
+            --accent: #f59e0b;         /* NARANJA/ÁMBAR (Energía/Hardware) */
+            --hover: #d97706;          /* Naranja oscuro */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 { margin: 0; color: var(--accent); font-size: 1.8rem; }
+        .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* GRID DE PROYECTOS */
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            padding: 3rem 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        /* Estilo tipo "Placa de Circuito" para la cabecera */
+        .card-header {
+            background: linear-gradient(135deg, #78350f, #1e293b);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            position: relative;
+        }
+        
+        /* Simulación de LED de estado */
+        .status-led {
+            width: 10px;
+            height: 10px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            box-shadow: 0 0 5px #22c55e;
+        }
+
+        .tech-icon { font-size: 3rem; color: var(--text-main); }
+
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; color: #fff; }
+        
+        .card-desc { 
+            font-size: 0.9rem; 
+            color: var(--text-muted); 
+            line-height: 1.5; 
+            margin-bottom: 1.5rem; 
+            flex-grow: 1; 
+        }
+
+        /* Datos de sensores */
+        .sensor-data {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+            border-radius: 4px;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .tag {
+            background-color: rgba(245, 158, 11, 0.15); 
+            color: #fcd34d;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .card-links { display: flex; gap: 1rem; margin-top: auto; }
+        
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            transition: background 0.2s;
+        }
+
+        .btn-primary { background-color: var(--accent); color: #0f172a; }
+        .btn-primary:hover { background-color: var(--hover); }
+        
+        .btn-secondary { border: 1px solid #334155; color: var(--text-main); }
+        .btn-secondary:hover { background-color: #334155; }
+
+        /* FOOTER */
+        .back-link {
+            display: inline-block;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .back-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Prototipado IoT</h1>
+        <p class="subtitle">Conectando el mundo físico a la nube | ESP32 & Sensores</p>
+    </header>
+
+    <div class="container">
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="status-led"></div>
+                    <span class="tech-icon">🌱</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Visión Artificial Agrícola</h3>
+                    <p class="card-desc">Sistema inteligente para detección de deficiencias nutricionales en cultivos de lechuga. Uso de cámaras y procesamiento de imagen para optimizar el agro en el Valle del Cauca.</p>
+                    
+                    <div class="sensor-data">
+                        > Target: Lactuca Sativa<br>
+                        > Sensor: ESP32-CAM / IA<br>
+                        > Status: Analizando...
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">ESP32-CAM</span>
+                        <span class="tag">Python/OpenCV</span>
+                        <span class="tag">IA Vision</span>
+                        <span class="tag">IoT</span>
+                    </div>
+                    <div class="card-links">
+                        <span class="btn btn-secondary">Proyecto de Grado</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="status-led" style="background-color: #ef4444;"></div> <span class="tech-icon">🌡️</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Estación Meteorológica</h3>
+                    <p class="card-desc">Nodo IoT para medición de variables ambientales en tiempo real. Envío de telemetría vía MQTT a dashboard en la nube.</p>
+                    
+                    <div class="sensor-data">
+                        Temp: 24.5°C | Hum: 60%<br>
+                        Protocol: MQTT / WiFi<br>
+                        Board: ESP32 DevKit V1
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">C++ / Arduino</span>
+                        <span class="tag">MQTT</span>
+                        <span class="tag">DHT22</span>
+                        <span class="tag">Grafana</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="btn btn-secondary">Ver Circuito</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="status-led"></div>
+                    <span class="tech-icon">🔌</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Control Industrial / Domótica</h3>
+                    <p class="card-desc">Automatización de actuadores (relés, motores) mediante interfaz web y móvil. Control remoto de baja latencia.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Relés 5V</span>
+                        <span class="tag">ESP8266</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#" class="btn btn-primary">Demo App</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Volver al Inicio</a>
+        </div>
+    </div>
+
+</body>
+</html>
