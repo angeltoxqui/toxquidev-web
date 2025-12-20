@@ -3,193 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Web | ToxquiDev</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;       /* Fondo principal */
-            --card-bg: #1e293b;        /* Fondo tarjetas */
-            --text-main: #e2e8f0;      /* Texto principal */
-            --text-muted: #94a3b8;     /* Texto secundario */
-            --accent: #38bdf8;         /* Azul brillante */
-            --hover: #0ea5e9;          /* Azul hover */
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* HEADER */
-        header {
-            width: 100%;
-            padding: 2rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #334155;
-            background: rgba(15, 23, 42, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        h1 { margin: 0; color: var(--accent); font-size: 1.8rem; }
-        .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
-
-        /* GRID DE PROYECTOS */
-        .container {
-            max-width: 1000px;
-            width: 90%;
-            padding: 3rem 0;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 180px;
-            background-color: #334155; /* Color temporal si no hay imagen */
-            object-fit: cover;
-            border-bottom: 1px solid #334155;
-        }
-
-        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        
-        .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; color: #fff; }
-        
-        .card-desc { 
-            font-size: 0.9rem; 
-            color: var(--text-muted); 
-            line-height: 1.5; 
-            margin-bottom: 1.5rem; 
-            flex-grow: 1; 
-        }
-
-        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-        .tag {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .card-links { display: flex; gap: 1rem; margin-top: auto; }
-        
-        .btn {
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-align: center;
-            flex: 1;
-            transition: background 0.2s;
-        }
-
-        .btn-primary { background-color: var(--accent); color: #0f172a; }
-        .btn-primary:hover { background-color: var(--hover); }
-        
-        .btn-secondary { border: 1px solid #334155; color: var(--text-main); }
-        .btn-secondary:hover { background-color: #334155; }
-
-        /* FOOTER */
-        .back-link {
-            display: inline-block;
-            margin-top: 3rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 2px;
-        }
-        .back-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    </style>
+    <title>Desarrollo Web | ToxquiDev</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
         <h1>Desarrollo Web</h1>
-        <p class="subtitle">Proyectos destacados por &lt;ToxquiDev/&gt;</p>
+        <p class="subtitle">Sitios rápidos y responsivos</p>
     </header>
 
     <div class="container">
         <div class="projects-grid">
 
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x200/1e293b/38bdf8?text=Sistema+Terapia" alt="Sistema Terapia" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Sistema de Gestión Terapéutica</h3>
-                    <p class="card-desc">Plataforma SaaS para gestión de pacientes y sesiones. Incluye autenticación segura, base de datos en nube y dashboard financiero.</p>
-                    <div class="tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">FastAPI</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">Tailwind</span>
-                    </div>
-                    <div class="card-links">
-                        <a href="https://toxquidev-web-production.up.railway.app" target="_blank" class="btn btn-primary">Ver Demo</a>
-                        <a href="#" class="btn btn-secondary">Código</a>
-                    </div>
+            <div class="project-card" style="border-color: var(--accent-main);">
+                <div class="card-image" style="background-color: #334155; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+                    (FOTO AQUÍ)
                 </div>
-            </div>
-
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x200/1e293b/22c55e?text=FluxDev+Agency" alt="FluxDev" class="card-image">
+                
                 <div class="card-content">
-                    <h3 class="card-title">FluxDev Landing Page</h3>
-                    <p class="card-desc">Sitio web corporativo de alto rendimiento para agencia de tecnología. Diseño responsive y optimizado para SEO.</p>
+                    <h3 class="card-title">Landing Page Corporativa</h3>
+                    <p class="card-desc">Sitio web optimizado para SEO con diseño moderno y adaptado a móviles.</p>
+                    
                     <div class="tags">
                         <span class="tag">HTML5</span>
                         <span class="tag">CSS3</span>
                         <span class="tag">JavaScript</span>
                     </div>
+
                     <div class="card-links">
-                        <a href="#" class="btn btn-primary">Visitar</a>
+                        <a href="#" class="btn btn-primary">Ver Demo</a>
+                        <a href="#" class="btn btn-outline">Código</a>
                     </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x200/1e293b/e2e8f0?text=Próximo+Proyecto" alt="Futuro" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Tu Próxima Idea</h3>
-                    <p class="card-desc">Espacio reservado para futuros desarrollos e integraciones con APIs externas.</p>
-                    <div class="card-links">
-                        <span class="btn btn-secondary" style="cursor: default; opacity: 0.5;">En Construcción</span>
-                    </div>
-                </div>
             </div>
 
-        </div>
-
-        <div style="text-align: center;">
-            <a href="index.html" class="back-link">← Volver al Inicio</a>
-        </div>
+        <a href="index.html" class="back-link">← Volver al Inicio</a>
     </div>
 
 </body>
